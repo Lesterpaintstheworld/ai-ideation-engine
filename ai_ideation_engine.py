@@ -709,6 +709,14 @@ class EnhancedAIIdeationEngine(AIIdeationEngine):
     def __init__(self):
         super().__init__()
         self.continuous_improvement = ContinuousImprovementModule(self)
+
+    def initialize_knowledge_base(self):
+        # Initialize the knowledge base with some default data
+        return {
+            "AI concepts": ["machine learning", "neural networks", "deep learning", "natural language processing"],
+            "City challenges": ["traffic congestion", "energy efficiency", "waste management", "public safety"],
+            "Emerging technologies": ["blockchain", "quantum computing", "Internet of Things", "augmented reality"]
+        }
         self.current_phase = 1
 
     def initialize_knowledge_base(self):
