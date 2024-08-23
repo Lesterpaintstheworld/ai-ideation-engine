@@ -1593,6 +1593,19 @@ class EnhancedAIIdeationEngine(AIIdeationEngine):
             "Emerging technologies": ["blockchain", "quantum computing", "Internet of Things", "augmented reality"]
         }
 
+    def load_ethical_guidelines(self):
+        # In a real implementation, this would load from a file or database
+        return {
+            "privacy": "Ensure user data is protected and used only with explicit consent",
+            "fairness": "Avoid bias and discrimination in AI decision-making processes",
+            "transparency": "Provide clear explanations of AI system functionality and decision rationale",
+            "accountability": "Establish clear lines of responsibility for AI system actions",
+            "safety": "Implement robust safeguards to prevent harm to individuals or society",
+            "human_oversight": "Maintain meaningful human control over critical AI systems",
+            "environmental_impact": "Minimize the ecological footprint of AI systems",
+            "social_good": "Prioritize AI applications that benefit humanity and the environment"
+        }
+
     def generate_ideas(self, num_ideas=5):
         ideas = super().generate_ideas(num_ideas)
         # Add any enhanced functionality here
