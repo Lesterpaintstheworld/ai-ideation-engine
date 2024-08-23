@@ -1584,6 +1584,7 @@ class EnhancedAIIdeationEngine(AIIdeationEngine):
         super().__init__()
         self.continuous_improvement = ContinuousImprovementModule(self)
         self.current_phase = 1
+        self.idea_feedback = {}
 
     def initialize_knowledge_base(self):
         # Initialize the knowledge base with some default data
@@ -1605,6 +1606,42 @@ class EnhancedAIIdeationEngine(AIIdeationEngine):
             "environmental_impact": "Minimize the ecological footprint of AI systems",
             "social_good": "Prioritize AI applications that benefit humanity and the environment"
         }
+
+    def add_feedback(self, idea_id, feedback):
+        if idea_id not in self.idea_feedback:
+            self.idea_feedback[idea_id] = []
+        self.idea_feedback[idea_id].append(feedback)
+
+    def get_feedback(self, idea_id):
+        return self.idea_feedback.get(idea_id, [])
+
+    def analyze_feedback(self, idea_id):
+        feedback_list = self.get_feedback(idea_id)
+        if not feedback_list:
+            return "No feedback available for this idea."
+
+        positive_count = sum(1 for f in feedback_list if f['rating'] > 3)
+        negative_count = sum(1 for f in feedback_list if f['rating'] <= 3)
+        average_rating = sum(f['rating'] for f in feedback_list) / len(feedback_list)
+
+        analysis = f"Feedback analysis for idea {idea_id}:\n"
+        analysis += f"Total feedback: {len(feedback_list)}\n"
+        analysis += f"Positive feedback: {positive_count}\n"
+        analysis += f"Negative feedback: {negative_count}\n"
+        analysis += f"Average rating: {average_rating:.2f}\n"
+        analysis += "Common themes in comments:\n"
+
+        # Simple word frequency analysis for comments
+        word_freq = {}
+        for feedback in feedback_list:
+            for word in feedback['comment'].lower().split():
+                word_freq[word] = word_freq.get(word, 0) + 1
+        
+        common_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)[:5]
+        for word, freq in common_words:
+            analysis += f"- {word}: mentioned {freq} times\n"
+
+        return analysis
 
     def generate_ideas(self, num_ideas=5):
         ideas = super().generate_ideas(num_ideas)
