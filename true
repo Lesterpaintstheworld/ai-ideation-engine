@@ -1,0 +1,23 @@
+from dotenv import load_dotenv
+import os
+import logging
+
+def main():
+    # Set up logging
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+    logger = logging.getLogger(__name__)
+
+    logger.info("AI Ideation Engine started")
+    # Add your main logic here
+
+if __name__ == "__main__":
+    # Load environment variables from .env file
+    load_dotenv()
+    
+    # Check if OPENAI_API_KEY is set
+    if "OPENAI_API_KEY" not in os.environ:
+        print("Error: OPENAI_API_KEY environment variable is not set.")
+        print("Please make sure it's correctly set in your .env file.")
+        exit(1)
+    
+    main()
