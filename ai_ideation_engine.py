@@ -600,8 +600,12 @@ class AIIdeationEngine:
 
     @track_processing_time
     def generate_ideas(self, num_ideas=5):
-        # Existing implementation
-        ideas = super().generate_ideas(num_ideas)
+        ideas = []
+        for _ in range(num_ideas):
+            concept_combo = random.sample(self.concepts, 2)
+            challenge = random.choice(self.challenges)
+            idea = f"A {concept_combo[0]} system that uses {concept_combo[1]} to address {challenge} in the Cities of Light"
+            ideas.append(idea)
         self.update_performance_metrics(new_idea=True)
         return ideas
 
@@ -1652,6 +1656,9 @@ class EnhancedAIIdeationEngine(AIIdeationEngine):
             ideas.append(idea)
         self.update_performance_metrics(new_idea=True)
         return ideas
+
+    def run_continuous_improvement(self):
+        return self.continuous_improvement.run_improvement_cycle()
 
     def generate_ideas(self, num_ideas=5):
         ideas = super().generate_ideas(num_ideas)
