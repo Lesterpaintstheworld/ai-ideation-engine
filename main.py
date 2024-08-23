@@ -1,8 +1,8 @@
 from dotenv import load_dotenv
 import os
 import logging
-import os
 from ai_ideation_engine import EnhancedAIIdeationEngine
+from add_files import main as add_files
 
 def main():
     # Set up logging
@@ -13,6 +13,12 @@ def main():
 
     # Initialize the AI Ideation Engine
     ideation_engine = EnhancedAIIdeationEngine()
+
+    # Create a list of concept files to add
+    concept_files = [f"concept_{i}.txt" for i in range(1, 11)]  # This will create a list from concept_1.txt to concept_10.txt
+    
+    # Call add_files function to add the concept files
+    add_files(directories_to_scan=["specs"], exclude_dirs=set(), exclude_extensions={".py", ".md"})
 
     # Create the specs directory if it doesn't exist
     os.makedirs("specs", exist_ok=True)
