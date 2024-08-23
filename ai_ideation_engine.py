@@ -1644,6 +1644,16 @@ class EnhancedAIIdeationEngine(AIIdeationEngine):
         return analysis
 
     def generate_ideas(self, num_ideas=5):
+        ideas = []
+        for _ in range(num_ideas):
+            concept_combo = random.sample(self.concepts, 2)
+            challenge = random.choice(self.challenges)
+            idea = f"A {concept_combo[0]} system that uses {concept_combo[1]} to address {challenge} in the Cities of Light"
+            ideas.append(idea)
+        self.update_performance_metrics(new_idea=True)
+        return ideas
+
+    def generate_ideas(self, num_ideas=5):
         ideas = super().generate_ideas(num_ideas)
         # Add any enhanced functionality here
         return ideas

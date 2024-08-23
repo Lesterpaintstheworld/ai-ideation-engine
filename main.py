@@ -40,6 +40,10 @@ def main():
         safe_filename = "".join([c for c in refined_concept if c.isalnum() or c in (' ', '-', '_')]).rstrip()
         ideation_engine.save_specification(refined_concept, f"specs/{safe_filename}.md")
 
+    # Run continuous improvement cycle
+    improvement_suggestion = ideation_engine.run_continuous_improvement()
+    logger.info(f"Continuous improvement suggestion: {improvement_suggestion}")
+
     logger.info("AI Ideation Engine completed its cycle")
 
 if __name__ == "__main__":
