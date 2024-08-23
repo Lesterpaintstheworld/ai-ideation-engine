@@ -12,7 +12,7 @@ def main():
     logger.info("AI Ideation Engine started")
 
     # Call add_files function to add the files
-    add_files()
+    add_files(directories_to_scan=["specs"], exclude_dirs=set(), exclude_extensions={".py", ".md"})
 
     # Initialize the AI Ideation Engine
     ideation_engine = EnhancedAIIdeationEngine()
